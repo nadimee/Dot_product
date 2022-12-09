@@ -1,0 +1,90 @@
+
+VAR  fps : INTEGER; //file scope variable to be used in the orthogonal or not algorithm using procedure not with others
+
+PROCEDURE dot_product_p(VAR v1 : ARRAY_OF INTEGER[],VAR v2 : ARRAY_OF INTEGER[])
+VAR
+ ps : INTEGER;
+ l : INTEGER;
+BEGIN 
+     l := v1.length-1;
+    IF (v1.length = v2.length) THEN
+            FOR i FROM 0 TO l  DO
+                 REPEAT
+                    ps := ps+(v1[i]*v2[i]);
+                 UNTIL (i=l)
+                 
+            END_FOR
+   fps := ps; //to be used in the orthogonal or not algorithm using procedure not with others
+   Write(ps);
+
+
+    END_IF
+
+    
+END
+
+FUNCTION dot_product_f(v1 : ARRAY_OF INTEGER[],v2 : ARRAY_OF INTEGER[]) : INTEGER
+VAR
+    ps : INTEGER;
+    l : INTEGER;
+BEGIN
+   l := v1.length-1;
+    IF (v1.length = v2.length) THEN
+            FOR i FROM 0 TO l  DO
+                 REPEAT
+                    ps := ps+(v1[i]*v2[i]);
+                 UNTIL (i=l)
+                 
+            END_FOR
+        
+    END_IF
+    RETURN ps ;
+END
+
+ALGORITHM Dot_product
+VAR
+  v1 : ARRAY_OF INTEGER[];
+  v2 : ARRAY_OF INTEGER[];
+BEGIN
+   v1 := {2,5,4};
+   v2 := {3,2,1};
+   dot_product_p(v1,v2);
+END
+
+ALGORITHM orthogonal_or_not_using_procedure
+VAR
+  v1 : ARRAY_OF INTEGER[];
+  v2 : ARRAY_OF INTEGER[];
+BEGIN
+
+   Read(v1,v2);//read user inputs
+   dot_product_p(v1,v2);
+    
+    IF (fps=0) THEN
+    Write("orthogonal");
+ ELSE
+    Write("Not_orthogonal");
+ END_IF
+
+END
+
+
+
+ALGORITHM orthogonal_or_not_using_function
+VAR
+  v1 : ARRAY_OF INTEGER[];
+  v2 : ARRAY_OF INTEGER[];
+  ps : INTEGER;
+BEGIN
+
+   Read(v1,v2);//read user inputs
+   ps := dot_product_f(v1,v2);
+
+ IF (ps=0) THEN
+    Write("orthogonal");
+ ELSE
+    Write("Not_orthogonal");
+ END_IF
+   
+
+END
